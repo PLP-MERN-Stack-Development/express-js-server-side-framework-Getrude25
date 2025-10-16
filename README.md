@@ -1,62 +1,196 @@
-# Express.js RESTful API Assignment
+# Express Products API
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
-
-## Assignment Overview
-
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+A simple Express.js server-side application for managing products.
 
 ## Getting Started
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   cd express-js-server-side-framework-Getrude25
    ```
+
+2. Install dependencies:
+   ```sh
    npm install
    ```
-4. Run the server:
-   ```
-   npm start
-   ```
 
-## Files Included
+3. Create a `.env` file if needed (see `.env.example` if provided).
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+### Running the Server
 
-## Requirements
+Start the server with:
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+```sh
+node server.js
+```
 
-## API Endpoints
+The server will run on `http://localhost:3000` by default.
 
-The API will have the following endpoints:
+---
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+## API Documentation
 
-## Submission
+### Base URL
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+```
+http://localhost:3000
+```
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+### Endpoints
 
-## Resources
+#### 1. Get All Products
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+- **URL:** `/products`
+- **Method:** `GET`
+- **Description:** Retrieve a list of all products.
+
+**Example Request:**
+```sh
+curl http://localhost:3000/products
+```
+
+**Example Response:**
+```json
+[
+  {
+    "id": 1,
+    "name": "Product A",
+    "price": 100
+  },
+  {
+    "id": 2,
+    "name": "Product B",
+    "price": 200
+  }
+]
+```
+
+---
+
+#### 2. Get Product by ID
+
+- **URL:** `/products/:id`
+- **Method:** `GET`
+- **Description:** Retrieve a single product by its ID.
+
+**Example Request:**
+```sh
+curl http://localhost:3000/products/1
+```
+
+**Example Response:**
+```json
+{
+  "id": 1,
+  "name": "Product A",
+  "price": 100
+}
+```
+
+---
+
+#### 3. Create a New Product
+
+- **URL:** `/products`
+- **Method:** `POST`
+- **Description:** Add a new product.
+- **Request Body:**
+  ```json
+  {
+    "name": "Product C",
+    "price": 300
+  }
+  ```
+
+**Example Request:**
+```sh
+curl -X POST http://localhost:3000/products \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Product C","price":300}'
+```
+
+**Example Response:**
+```json
+{
+  "id": 3,
+  "name": "Product C",
+  "price": 300
+}
+```
+
+---
+
+#### 4. Update a Product
+
+- **URL:** `/products/:id`
+- **Method:** `PUT`
+- **Description:** Update an existing product.
+- **Request Body:**
+  ```json
+  {
+    "name": "Updated Product",
+    "price": 400
+  }
+  ```
+
+**Example Request:**
+```sh
+curl -X PUT http://localhost:3000/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Updated Product","price":400}'
+```
+
+**Example Response:**
+```json
+{
+  "id": 1,
+  "name": "Updated Product",
+  "price": 400
+}
+```
+
+---
+
+#### 5. Delete a Product
+
+- **URL:** `/products/:id`
+- **Method:** `DELETE`
+- **Description:** Delete a product by its ID.
+
+**Example Request:**
+```sh
+curl -X DELETE http://localhost:3000/products/1
+```
+
+**Example Response:**
+```json
+{
+  "message": "Product deleted successfully"
+}
+```
+
+---
+
+## Error Handling
+
+All errors are returned in the following format:
+
+```json
+{
+  "error": "Error message here"
+}
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License.
